@@ -6,6 +6,7 @@ import org.w3c.dom.stylesheets.LinkStyle;
 
 import java.time.LocalDate;
 import java.util.List;
+import java.util.UUID;
 
 @Entity
 @Table(name = "paciente")
@@ -51,4 +52,21 @@ public class Paciente {
 
     @OneToMany(mappedBy = "paciente")
     private List<Conversa> conversas;
+
+    public static Paciente novoPaciente(String nome, String cpf, Integer idade, LocalDate dataNascimento, String profissao,
+                                        String estadoCivil, Endereco endereco, DadosContato contato, Anamnese anamnese) {
+        return new Paciente(
+                UUID.randomUUID().toString(),
+                nome,
+                cpf,
+                idade,
+                dataNascimento,
+                profissao,
+                estadoCivil,
+                endereco,
+                contato,
+                anamnese,
+                null
+        );
+    }
 }

@@ -2,10 +2,15 @@ package com.gpa.clinica.crm.domain.model;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Embeddable;
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
+import lombok.NonNull;
 
 @Data
 @Embeddable
+@AllArgsConstructor
+@NoArgsConstructor
 public class HabitosDiarios {
 
     @Column(name = "tratamento_estetico_anterior")

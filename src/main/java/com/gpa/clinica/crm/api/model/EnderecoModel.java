@@ -8,4 +8,4 @@ public record EnderecoModel(
         String logradouro,
         String numero,
         String complemento
-) {}
+) { }
