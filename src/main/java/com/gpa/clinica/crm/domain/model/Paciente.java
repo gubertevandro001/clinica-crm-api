@@ -1,20 +1,16 @@
 package com.gpa.clinica.crm.domain.model;
 
+import com.gpa.clinica.crm.domain.util.IdGenerator;
 import jakarta.persistence.*;
 import lombok.*;
-import org.w3c.dom.stylesheets.LinkStyle;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
-import java.util.UUID;
 
 @Entity
 @Table(name = "paciente")
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
-@Getter
-@Setter
-@AllArgsConstructor
-@NoArgsConstructor
 public class Paciente {
 
     @Id
@@ -44,29 +40,87 @@ public class Paciente {
     private Endereco endereco;
 
     @Embedded
-    private DadosContato contato;
+    private Contato contato;
 
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "anamnese_id")
     private Anamnese anamnese;
 
     @OneToMany(mappedBy = "paciente")
-    private List<Conversa> conversas;
+    private List<Conversa> conversas = new ArrayList<>();
 
-    public static Paciente novoPaciente(String nome, String cpf, Integer idade, LocalDate dataNascimento, String profissao,
-                                        String estadoCivil, Endereco endereco, DadosContato contato, Anamnese anamnese) {
-        return new Paciente(
-                UUID.randomUUID().toString(),
-                nome,
-                cpf,
-                idade,
-                dataNascimento,
-                profissao,
-                estadoCivil,
-                endereco,
-                contato,
-                anamnese,
-                null
-        );
+    public Paciente(String nome, String cpf, Integer idade, LocalDate dataNascimento,
+                    String profissao, String estadoCivil, Endereco endereco, Contato contato, Anamnese anamnese) {
+        this.id = IdGenerator.generateId();
+        this.nome = nome;
+        this.cpf = cpf;
+        this.idade = idade;
+        this.dataNascimento = dataNascimento;
+        this.profissao = profissao;
+        this.estadoCivil = estadoCivil;
+        this.endereco = endereco;
+        this.contato = contato;
+        this.anamnese = anamnese;
+    }
+
+    public Paciente atualizar(String nome, Integer idade, LocalDate dataNascimento, String profissao,
+                              String estadoCivil, Endereco endereco, Contato contato, String anotacoesAnamnese) {
+        this.nome = nome;
+        this.idade = idade;
+        this.dataNascimento = dataNascimento;
+        this.profissao = profissao;
+        this.estadoCivil = estadoCivil;
+        this.endereco = endereco;
+        this.contato = contato;
+        this.anamnese.atualizarAnotacoes(anotacoesAnamnese);
+        return this;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public String getNome() {
+        return nome;
+    }
+
+    public String getCpf() {
+        return cpf;
+    }
+
+    public Integer getIdade() {
+        return idade;
+    }
+
+    public LocalDate getDataNascimento() {
+        return dataNascimento;
+    }
+
+    public String getProfissao() {
+        return profissao;
+    }
+
+    public String getEstadoCivil() {
+        return estadoCivil;
+    }
+
+    public Endereco getEndereco() {
+        return endereco;
+    }
+
+    public Contato getContato() {
+        return contato;
+    }
+
+    public Anamnese getAnamnese() {
+        return anamnese;
+    }
+
+    public List<Conversa> getConversas() {
+        return conversas;
+    }
+
+    public void adicionarConversa(Conversa conversa){
+        conversas.add(conversa);
     }
 }

@@ -1,19 +1,16 @@
 package com.gpa.clinica.crm.domain.model;
 
+import com.gpa.clinica.crm.domain.util.IdGenerator;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.util.Objects;
+
 @Entity
 @Table(name = "documento")
-@EqualsAndHashCode(onlyExplicitlyIncluded = true)
-@Getter
-@Setter
-@AllArgsConstructor
-@NoArgsConstructor
 public class Conversa {
 
     @Id
-    @EqualsAndHashCode.Include
     @Column(name = "id")
     private String id;
 
@@ -23,4 +20,63 @@ public class Conversa {
     @ManyToOne
     @JoinColumn(name = "paciente_id")
     private Paciente paciente;
+
+    @ManyToOne
+    @JoinColumn(name = "usuario_id")
+    private Usuario usuario;
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    public String getConteudo() {
+        return conteudo;
+    }
+
+    public void setConteudo(String conteudo) {
+        this.conteudo = conteudo;
+    }
+
+    public Paciente getPaciente() {
+        return paciente;
+    }
+
+    public void setPaciente(Paciente paciente) {
+        this.paciente = paciente;
+    }
+
+    public Usuario getUsuario() {
+        return usuario;
+    }
+
+    public void setUsuario(Usuario usuario) {
+        this.usuario = usuario;
+    }
+
+    private Conversa(String id, String conteudo, Paciente paciente, Usuario usuario) {
+        this.id = id;
+        this.conteudo = conteudo;
+        this.paciente = paciente;
+        this.usuario = usuario;
+    }
+
+    public static Conversa novaConversa(String conteudo, Paciente paciente, Usuario usuario) {
+        return new Conversa(IdGenerator.generateId(), conteudo, paciente, usuario);
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (o == null || getClass() != o.getClass()) return false;
+        Conversa conversa = (Conversa) o;
+        return Objects.equals(id, conversa.id);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hashCode(id);
+    }
 }

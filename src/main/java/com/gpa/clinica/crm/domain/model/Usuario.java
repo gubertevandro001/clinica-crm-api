@@ -38,12 +38,4 @@ public class Usuario {
 
     @Column(name = "ativo")
     private boolean ativo;
-
-    @ManyToMany
-    @JoinTable(
-            name = "usuario_paciente",
-            joinColumns = @JoinColumn(name = "usuario_id"),
-            inverseJoinColumns = @JoinColumn(name = "paciente_id")
-    )
-    private Set<Paciente> pacientes =  new HashSet<>();
 }

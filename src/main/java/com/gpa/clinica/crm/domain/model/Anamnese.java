@@ -1,9 +1,9 @@
 package com.gpa.clinica.crm.domain.model;
 
+import com.gpa.clinica.crm.domain.util.IdGenerator;
 import jakarta.persistence.*;
 import lombok.*;
-
-import java.util.UUID;
+import org.springframework.util.StringUtils;
 
 @Entity
 @Table(name = "anamnese")
@@ -28,8 +28,18 @@ public class Anamnese {
     @Embedded
     private TratamentoEsteticoCirurgico tratamentoEsteticoCirurgico;
 
-    public static Anamnese novaAnamnese(HabitosDiarios habitosDiarios, HistoricoClinico historicoClinico,
-                                        TratamentoEsteticoCirurgico tratamentoEstetico) {
-        return new Anamnese(UUID.randomUUID().toString(), habitosDiarios,  historicoClinico, tratamentoEstetico);
+    public Anamnese(HabitosDiarios habitosDiarios, HistoricoClinico historicoClinico,
+                    TratamentoEsteticoCirurgico tratamentoEsteticoCirurgico) {
+        this.id = IdGenerator.generateId();
+        this.habitosDiarios = habitosDiarios;
+        this.historicoClinico = historicoClinico;
+        this.tratamentoEsteticoCirurgico = tratamentoEsteticoCirurgico;
+    }
+
+    public Anamnese atualizarAnotacoes(String anotacoes) {
+        if (StringUtils.hasText(anotacoes)) {
+            this.habitosDiarios.setAnotacoes(anotacoes);
+        }
+        return this;
     }
 }

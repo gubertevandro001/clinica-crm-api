@@ -10,7 +10,7 @@ import lombok.NoArgsConstructor;
 @Embeddable
 @NoArgsConstructor
 @AllArgsConstructor
-public class DadosContato {
+public class Contato {
 
     @Column(name = "telefone")
     private String telefone;
