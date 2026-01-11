@@ -11,6 +11,6 @@ public record CadastrarPacienteResponse(
         String profissao,
         String estadoCivil,
         EnderecoModel endereco,
-        DadosContatoModel contato,
+        ContatoModel contato,
         AnamneseModel anamnese
 ) {}

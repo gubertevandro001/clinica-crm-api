@@ -12,7 +12,6 @@ import org.springframework.web.bind.annotation.RestController;
 @RequiredArgsConstructor
 public class PacienteController implements PacienteControllerOpenAPI {
 
-
     @Override
     public CadastrarPacienteResponse cadastrarPaciente(CadastrarPacienteRequest cadastrarPacienteRequest) {
         return null;
