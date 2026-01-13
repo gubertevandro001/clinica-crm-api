@@ -39,7 +39,8 @@ public class APIExceptionHandler extends ResponseEntityExceptionHandler {
     public ResponseEntity<Object> handleAuthenticationException(AuthenticationException ex, WebRequest request) {
         final var title = "Credenciais inválidas";
         final var problem = new Problem(HttpStatus.UNAUTHORIZED.value(), title,
-                "As credenciais de acesso fornecidas estão inválidas, revise as informações e realize novamente o login!");
+                "As credenciais de acesso fornecidas estão inválidas, " +
+                        "revise as informações e realize novamente o login!");
 
         return handleExceptionInternal(ex, problem, new HttpHeaders(), HttpStatus.UNAUTHORIZED, request);
     }

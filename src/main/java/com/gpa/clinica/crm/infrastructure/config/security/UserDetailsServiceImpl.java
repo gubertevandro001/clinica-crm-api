@@ -1,6 +1,6 @@
 package com.gpa.clinica.crm.infrastructure.config.security;
 
-import com.gpa.clinica.crm.domain.model.Usuario;
+import com.gpa.clinica.crm.domain.entity.Usuario;
 import com.gpa.clinica.crm.domain.repository.UsuarioRepository;
 import com.gpa.clinica.crm.infrastructure.auth.UsuarioAuth;
 import lombok.RequiredArgsConstructor;

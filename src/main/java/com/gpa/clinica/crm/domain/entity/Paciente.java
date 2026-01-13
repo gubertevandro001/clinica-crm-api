@@ -1,20 +1,20 @@
-package com.gpa.clinica.crm.domain.model;
+package com.gpa.clinica.crm.domain.entity;
 
 import com.gpa.clinica.crm.domain.util.IdGenerator;
+import com.gpa.clinica.crm.domain.valueobject.Contato;
+import com.gpa.clinica.crm.domain.valueobject.Endereco;
 import jakarta.persistence.*;
-import lombok.*;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 @Entity
 @Table(name = "paciente")
-@EqualsAndHashCode(onlyExplicitlyIncluded = true)
 public class Paciente {
 
     @Id
-    @EqualsAndHashCode.Include
     @Column(name = "id")
     private String id;
 
@@ -122,5 +122,17 @@ public class Paciente {
 
     public void adicionarConversa(Conversa conversa){
         conversas.add(conversa);
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (o == null || getClass() != o.getClass()) return false;
+        Paciente paciente = (Paciente) o;
+        return Objects.equals(id, paciente.id);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hashCode(id);
     }
 }

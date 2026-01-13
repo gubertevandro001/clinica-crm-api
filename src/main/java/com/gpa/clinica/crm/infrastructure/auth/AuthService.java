@@ -1,6 +1,6 @@
 package com.gpa.clinica.crm.infrastructure.auth;
 
-import com.gpa.clinica.crm.domain.model.Usuario;
+import com.gpa.clinica.crm.domain.entity.Usuario;
 import com.gpa.clinica.crm.domain.repository.UsuarioRepository;
 import com.gpa.clinica.crm.infrastructure.auth.model.RegisterRequest;
 import com.gpa.clinica.crm.infrastructure.auth.model.RegisterResponse;
@@ -11,7 +11,6 @@ import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.UUID;

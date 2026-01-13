@@ -1,19 +1,19 @@
 package com.gpa.clinica.crm.domain.mapper;
 
-import com.gpa.clinica.crm.api.model.EnderecoModel;
-import com.gpa.clinica.crm.domain.model.Endereco;
+import com.gpa.clinica.crm.api.model.request.EnderecoRequest;
+import com.gpa.clinica.crm.domain.valueobject.Endereco;
 
 public class EnderecoMapper {
 
-    public static Endereco criarEndereco(EnderecoModel enderecoModel) {
+    public static Endereco criarEndereco(EnderecoRequest enderecoRequest) {
         return new Endereco(
-                enderecoModel.cidade(),
-                enderecoModel.estado(),
-                enderecoModel.bairro(),
-                enderecoModel.cep(),
-                enderecoModel.logradouro(),
-                enderecoModel.numero(),
-                enderecoModel.complemento()
+                enderecoRequest.cidade(),
+                enderecoRequest.estado(),
+                enderecoRequest.bairro(),
+                enderecoRequest.cep(),
+                enderecoRequest.logradouro(),
+                enderecoRequest.numero(),
+                enderecoRequest.complemento()
         );
     }
 }

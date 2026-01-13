@@ -1,4 +1,4 @@
-package com.gpa.clinica.crm.domain.model;
+package com.gpa.clinica.crm.domain.valueobject;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Embeddable;

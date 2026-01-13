@@ -1,8 +1,7 @@
-package com.gpa.clinica.crm.domain.model;
+package com.gpa.clinica.crm.domain.entity;
 
 import com.gpa.clinica.crm.domain.util.IdGenerator;
 import jakarta.persistence.*;
-import lombok.*;
 
 import java.util.Objects;
 

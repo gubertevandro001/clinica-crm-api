@@ -1,20 +1,37 @@
 package com.gpa.clinica.crm.api.controller.openapi;
 
-import com.gpa.clinica.crm.api.model.CadastrarPacienteRequest;
-import com.gpa.clinica.crm.api.model.CadastrarPacienteResponse;
+import com.gpa.clinica.crm.api.model.request.AtualizarPacienteRequest;
+import com.gpa.clinica.crm.api.model.request.CadastrarPacienteRequest;
+import com.gpa.clinica.crm.api.model.response.PacienteResponse;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.tags.Tag;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
+import jakarta.validation.Valid;
+import org.springframework.web.bind.annotation.*;
 
 @Tag(name = "Pacientes", description = "Gerencia os pacientes")
 public interface PacienteControllerOpenAPI {
+
+    @GetMapping("/{pacienteId}")
+    @Operation(summary = "Realiza a busca de um paciente pelo id")
+    @ApiResponse(responseCode = "200", description = "Paciente retornado com sucesso!")
+    @ApiResponse(responseCode = "404", description = "Paciente não encontrado")
+    @ApiResponse(responseCode = "400", description = "Erro de validação")
+    @ApiResponse(responseCode = "500", description = "Erro interno do servidor")
+    public PacienteResponse buscarPacientePorId(@PathVariable("pacienteId") String pacienteId);
 
     @PostMapping
     @Operation(summary = "Realiza o cadastro completo do paciente")
     @ApiResponse(responseCode = "201", description = "Paciente cadastrado com sucesso!")
     @ApiResponse(responseCode = "400", description = "Erro de validação")
     @ApiResponse(responseCode = "500", description = "Erro interno do servidor")
-    public CadastrarPacienteResponse cadastrarPaciente(@RequestBody CadastrarPacienteRequest cadastrarPacienteRequest);
+    public PacienteResponse cadastrarPaciente(@RequestBody @Valid CadastrarPacienteRequest cadastrarPacienteRequest);
+
+    @PutMapping("/{pacienteId}")
+    @Operation(summary = "Realiza a atualização do cadastro do paciente")
+    @ApiResponse(responseCode = "200", description = "Paciente atualizado com sucesso!")
+    @ApiResponse(responseCode = "400", description = "Erro de validação")
+    @ApiResponse(responseCode = "500", description = "Erro interno do servidor")
+    public PacienteResponse atualizarPaciente(@PathVariable("pacienteId") String pacienteId,
+                                              @RequestBody @Valid AtualizarPacienteRequest request);
 }

@@ -1,6 +1,6 @@
 package com.gpa.clinica.crm.infrastructure.auth;
 
-import com.gpa.clinica.crm.domain.model.Usuario;
+import com.gpa.clinica.crm.domain.entity.Usuario;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 

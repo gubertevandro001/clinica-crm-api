@@ -1,19 +1,35 @@
 package com.gpa.clinica.crm.api.controller;
 
 import com.gpa.clinica.crm.api.controller.openapi.PacienteControllerOpenAPI;
-import com.gpa.clinica.crm.api.model.CadastrarPacienteRequest;
-import com.gpa.clinica.crm.api.model.CadastrarPacienteResponse;
-import lombok.RequiredArgsConstructor;
+import com.gpa.clinica.crm.api.model.request.AtualizarPacienteRequest;
+import com.gpa.clinica.crm.api.model.request.CadastrarPacienteRequest;
+import com.gpa.clinica.crm.api.model.response.PacienteResponse;
+import com.gpa.clinica.crm.domain.service.PacienteService;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping("/pacientes")
-@RequiredArgsConstructor
 public class PacienteController implements PacienteControllerOpenAPI {
 
+    private final PacienteService pacienteService;
+
+    public PacienteController(PacienteService pacienteService) {
+        this.pacienteService = pacienteService;
+    }
+
     @Override
-    public CadastrarPacienteResponse cadastrarPaciente(CadastrarPacienteRequest cadastrarPacienteRequest) {
-        return null;
+    public PacienteResponse buscarPacientePorId(String pacienteId) {
+        return PacienteResponse.aPartirDe(pacienteService.buscarPorId(pacienteId));
+    }
+
+    @Override
+    public PacienteResponse cadastrarPaciente(CadastrarPacienteRequest cadastrarPacienteRequest) {
+        return PacienteResponse.aPartirDe(pacienteService.cadastrar(cadastrarPacienteRequest));
+    }
+
+    @Override
+    public PacienteResponse atualizarPaciente(String pacienteId, AtualizarPacienteRequest request) {
+        return PacienteResponse.aPartirDe(pacienteService.atualizar(pacienteId, request));
     }
 }

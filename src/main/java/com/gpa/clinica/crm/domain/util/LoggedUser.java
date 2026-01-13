@@ -5,17 +5,11 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Component;
 
 @Component
-public class UsuarioLogadoUtil {
-
-    private UsuarioLogadoUtil() {}
+public final class LoggedUser {
 
     public static String getId() {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-
-        if (auth == null || !auth.isAuthenticated()) {
-            throw new RuntimeException("Usuário não autenticado");
-        }
-
+        assert auth != null;
         return auth.getName();
     }
 }
