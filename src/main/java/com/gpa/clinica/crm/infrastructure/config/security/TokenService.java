@@ -57,6 +57,7 @@ public class TokenService {
                 .withClaim("nome", usuario.getUsuario().getNome())
                 .withClaim("email", usuario.getUsuario().getEmail())
                 .withClaim("login", usuario.getUsuario().getLogin())
+                .withClaim("role", usuario.getUsuario().getRole().getDescricao())
                 .withSubject(usuario.getUsuarioId())
                 .withExpiresAt(Date.from(dataExpiracao.atZone(ZoneId.systemDefault()).toInstant()))
                 .sign(Algorithm.HMAC256(secretKey));

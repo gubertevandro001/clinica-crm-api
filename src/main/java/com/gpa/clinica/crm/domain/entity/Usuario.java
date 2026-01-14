@@ -1,5 +1,6 @@
 package com.gpa.clinica.crm.domain.entity;
 
+import com.gpa.clinica.crm.domain.valueobject.Role;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -32,9 +33,12 @@ public class Usuario {
     @Column(name = "ativo")
     private boolean ativo;
 
+    @Enumerated(EnumType.STRING)
+    private Role role;
+
     public Usuario() {}
 
-    public Usuario(String id, String nome, String cpf, String email, String login, String senha, boolean ativo) {
+    public Usuario(String id, String nome, String cpf, String email, String login, String senha, boolean ativo, Role role) {
         this.id = id;
         this.nome = nome;
         this.cpf = cpf;
@@ -42,6 +46,7 @@ public class Usuario {
         this.login = login;
         this.senha = senha;
         this.ativo = ativo;
+        this.role = role;
     }
 
     public String getId() {
@@ -98,6 +103,14 @@ public class Usuario {
 
     public void setAtivo(boolean ativo) {
         this.ativo = ativo;
+    }
+
+    public Role getRole() {
+        return role;
+    }
+
+    public void setRole(Role role) {
+        this.role = role;
     }
 
     @Override
