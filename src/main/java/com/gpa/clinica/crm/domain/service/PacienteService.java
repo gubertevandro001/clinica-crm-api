@@ -23,19 +23,14 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
-import java.util.List;
-
 @Service
 public class PacienteService {
 
     private final PacienteRepository pacienteRepository;
-    private final ConversaRepository conversaRepository;
     private final UsuarioService usuarioService;
 
-    public PacienteService(PacienteRepository pacienteRepository, ConversaRepository conversaRepository,
-                           UsuarioService usuarioService) {
+    public PacienteService(PacienteRepository pacienteRepository, UsuarioService usuarioService) {
         this.pacienteRepository = pacienteRepository;
-        this.conversaRepository = conversaRepository;
         this.usuarioService = usuarioService;
     }
 
@@ -44,7 +39,7 @@ public class PacienteService {
     }
 
     public Page<Paciente> buscarPorFiltro(PageableRequest request) {
-        Pageable pageable = PageRequest.of(request.numeroDaPagina(), request.registrosPorPagina());
+        Pageable pageable = PageRequest.of(request.numeroDaPagina() - 1, request.registrosPorPagina());
         return pacienteRepository.findAll(BuscaPacientesSpecification.buscarPor(request.filtro()), pageable);
     }
 
@@ -70,7 +65,7 @@ public class PacienteService {
     }
 
     @Transactional
-    public Conversa adicionarConversa(String pacienteId, MultipartFile arquivoDaConversa) {
+    public void adicionarConversa(String pacienteId, MultipartFile arquivoDaConversa) {
         Paciente paciente = buscarPorId(pacienteId);
         Usuario usuario = usuarioService.buscarPorId(LoggedUser.getId());
 
@@ -78,6 +73,6 @@ public class PacienteService {
 
         paciente.adicionarConversa(conversa);
 
-        return conversaRepository.save(conversa);
+        pacienteRepository.save(paciente);
     }
 }

@@ -6,7 +6,7 @@ import org.springframework.data.domain.Page;
 import java.util.List;
 
 public record PacientePageableResponse(
-        List<PacienteResponse> pacientes,
+        List<PacienteResumoResponse> pacientes,
         Long totalDeRegistros,
         Integer totalDePaginas,
         Integer paginaAtual,
@@ -14,9 +14,9 @@ public record PacientePageableResponse(
 ) {
 
     public static PacientePageableResponse aPartirDe(Page<Paciente> page) {
-        List<PacienteResponse> pacientes = page.getContent()
+        List<PacienteResumoResponse> pacientes = page.getContent()
                 .stream()
-                .map(PacienteResponse::aPartirDe)
+                .map(PacienteResumoResponse::aPartirDe)
                 .toList();
 
         return new PacientePageableResponse(

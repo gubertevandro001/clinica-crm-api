@@ -46,7 +46,7 @@ public class Paciente {
     @JoinColumn(name = "anamnese_id")
     private Anamnese anamnese;
 
-    @OneToMany(mappedBy = "paciente")
+    @OneToMany(mappedBy = "paciente", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Conversa> conversas = new ArrayList<>();
 
     public Paciente(String nome, String cpf, Integer idade, LocalDate dataNascimento,
@@ -122,6 +122,7 @@ public class Paciente {
 
     public void adicionarConversa(Conversa conversa){
         conversas.add(conversa);
+        conversa.setPaciente(this);
     }
 
     @Override

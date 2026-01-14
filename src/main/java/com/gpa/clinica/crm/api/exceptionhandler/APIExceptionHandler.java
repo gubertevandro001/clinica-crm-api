@@ -1,6 +1,7 @@
 package com.gpa.clinica.crm.api.exceptionhandler;
 
 import com.auth0.jwt.exceptions.JWTVerificationException;
+import com.gpa.clinica.crm.domain.exception.EntidadeNaoEncontradaException;
 import io.swagger.v3.oas.annotations.Hidden;
 import lombok.AllArgsConstructor;
 import org.jspecify.annotations.Nullable;
@@ -32,6 +33,15 @@ public class APIExceptionHandler extends ResponseEntityExceptionHandler {
         final var problem = new Problem(HttpStatus.INTERNAL_SERVER_ERROR.value(), title, MSG_ERRO_GENERICA_USUARIO_FINAL);
 
         return handleExceptionInternal(exception, problem, new HttpHeaders(), HttpStatus.INTERNAL_SERVER_ERROR, request);
+    }
+
+    @ExceptionHandler(EntidadeNaoEncontradaException.class)
+    @ResponseStatus(HttpStatus.NOT_FOUND)
+    public ResponseEntity<Object> handleEntidadeNaoEncontradaException(WebRequest request,
+                                                                       EntidadeNaoEncontradaException exception) {
+        final var title = "Entidade não encontrada";
+        final var problem = new Problem(HttpStatus.NOT_FOUND.value(), title, exception.getMessage());
+        return handleExceptionInternal(exception, problem, new HttpHeaders(), HttpStatus.NOT_FOUND, request);
     }
 
     @ExceptionHandler({AuthenticationException.class, UsernameNotFoundException.class})
