@@ -30,8 +30,8 @@ public class PacienteController implements PacienteControllerOpenAPI {
 
     @Override
     public PacientePageableResponse buscarPacientesPorFiltro(int pagina, int tamanho, String filtro) {
-        PageableRequest pageable = new PageableRequest(filtro, pagina, tamanho);
-        return PacientePageableResponse.aPartirDe(pacienteService.buscarPorFiltro(pageable));
+        return PacientePageableResponse.aPartirDe(pacienteService.buscarPorFiltro(
+                new PageableRequest(filtro, pagina, tamanho)));
     }
 
     @Override
