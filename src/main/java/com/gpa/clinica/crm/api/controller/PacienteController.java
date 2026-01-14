@@ -3,10 +3,15 @@ package com.gpa.clinica.crm.api.controller;
 import com.gpa.clinica.crm.api.controller.openapi.PacienteControllerOpenAPI;
 import com.gpa.clinica.crm.api.model.request.AtualizarPacienteRequest;
 import com.gpa.clinica.crm.api.model.request.CadastrarPacienteRequest;
+import com.gpa.clinica.crm.api.model.request.PageableRequest;
+import com.gpa.clinica.crm.api.model.response.PacientePageableResponse;
 import com.gpa.clinica.crm.api.model.response.PacienteResponse;
 import com.gpa.clinica.crm.domain.service.PacienteService;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("/pacientes")
@@ -21,6 +26,12 @@ public class PacienteController implements PacienteControllerOpenAPI {
     @Override
     public PacienteResponse buscarPacientePorId(String pacienteId) {
         return PacienteResponse.aPartirDe(pacienteService.buscarPorId(pacienteId));
+    }
+
+    @Override
+    public PacientePageableResponse buscarPacientesPorFiltro(int pagina, int tamanho, String filtro) {
+        PageableRequest pageable = new PageableRequest(filtro, pagina, tamanho);
+        return PacientePageableResponse.aPartirDe(pacienteService.buscarPorFiltro(pageable));
     }
 
     @Override

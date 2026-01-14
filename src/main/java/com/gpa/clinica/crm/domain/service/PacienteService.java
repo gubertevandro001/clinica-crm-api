@@ -2,6 +2,8 @@ package com.gpa.clinica.crm.domain.service;
 
 import com.gpa.clinica.crm.api.model.request.AtualizarPacienteRequest;
 import com.gpa.clinica.crm.api.model.request.CadastrarPacienteRequest;
+import com.gpa.clinica.crm.api.model.request.PageableRequest;
+import com.gpa.clinica.crm.api.model.response.PacientePageableResponse;
 import com.gpa.clinica.crm.domain.exception.PacienteNaoEncontradoException;
 import com.gpa.clinica.crm.domain.mapper.ContatoMapper;
 import com.gpa.clinica.crm.domain.mapper.EnderecoMapper;
@@ -13,6 +15,10 @@ import com.gpa.clinica.crm.domain.repository.ConversaRepository;
 import com.gpa.clinica.crm.domain.repository.PacienteRepository;
 import com.gpa.clinica.crm.domain.util.TextExtractor;
 import com.gpa.clinica.crm.domain.util.LoggedUser;
+import com.gpa.clinica.crm.infrastructure.spec.BuscaPacientesSpecification;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
@@ -37,8 +43,9 @@ public class PacienteService {
         return pacienteRepository.findById(pacienteId).orElseThrow(() -> new PacienteNaoEncontradoException(pacienteId));
     }
 
-    public List<Paciente> buscarTodos() {
-        return pacienteRepository.findAll();
+    public Page<Paciente> buscarPorFiltro(PageableRequest request) {
+        Pageable pageable = PageRequest.of(request.numeroDaPagina(), request.registrosPorPagina());
+        return pacienteRepository.findAll(BuscaPacientesSpecification.buscarPor(request.filtro()), pageable);
     }
 
     public Paciente cadastrar(CadastrarPacienteRequest request) {
