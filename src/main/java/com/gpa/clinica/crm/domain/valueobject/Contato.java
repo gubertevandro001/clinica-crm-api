@@ -15,6 +15,8 @@ public class Contato {
     @Column(name = "email")
     private String email;
 
+    public Contato() {}
+
     public Contato(String telefone, String celular, String email) {
         this.telefone = telefone;
         this.celular = celular;

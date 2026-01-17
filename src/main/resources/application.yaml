@@ -9,7 +9,7 @@ spring:
   datasource:
     url: jdbc:sqlserver://localhost:1433;databaseName=DB_CLINICA;encrypt=false
     username: sa
-    password: SuperFood#!
+    password: Clinica#!
     jpa:
       generate-ddl: false
       hibernate:
@@ -25,7 +25,7 @@ spring:
       enabled: true
       url: jdbc:sqlserver://localhost:1433;databaseName=DB_CLINICA;encrypt=false
       user: sa
-      password: SuperFood#!
+      password: Clinica#!
       locations: classpath:db/migration
 
 springdoc:

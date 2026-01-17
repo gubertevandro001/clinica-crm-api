@@ -26,6 +26,8 @@ public class Anamnese {
     @Embedded
     private TratamentoEsteticoCirurgico tratamentoEsteticoCirurgico;
 
+    public Anamnese() {}
+
     public Anamnese(HabitosDiarios habitosDiarios, HistoricoClinico historicoClinico,
                     TratamentoEsteticoCirurgico tratamentoEsteticoCirurgico) {
         this.id = IdGenerator.generateId();

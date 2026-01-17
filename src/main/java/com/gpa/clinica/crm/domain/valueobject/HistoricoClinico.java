@@ -8,7 +8,6 @@ import lombok.NoArgsConstructor;
 
 @Data
 @Embeddable
-@NoArgsConstructor
 @AllArgsConstructor
 public class HistoricoClinico {
 
@@ -95,4 +94,6 @@ public class HistoricoClinico {
 
     @Column(name = "doenca_descricao")
     private String doencaDescricao;
+
+    public HistoricoClinico() {}
 }

@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 @Tag(name = "Usuários", description = "Gerencia os usuários do sistema")
 public interface UsuarioControllerOpenAPI {
 
-    @GetMapping
+    @GetMapping("/usuario-logado")
     @Operation(summary = "Realiza a busca de dados do usuário logado")
     @ApiResponse(responseCode = "200", description = "Dados do usuário retornados com sucesso!")
     @ApiResponse(responseCode = "500", description = "Erro interno do servidor")

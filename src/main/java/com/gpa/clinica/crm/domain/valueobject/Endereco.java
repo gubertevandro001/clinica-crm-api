@@ -27,6 +27,8 @@ public class Endereco {
     @Column(name = "endereco_complemento")
     private String complemento;
 
+    public Endereco() {}
+
     public Endereco(String cidade, String estado, String bairro, String cep, String logradouro,
                     String numero, String complemento) {
         this.cidade = cidade;

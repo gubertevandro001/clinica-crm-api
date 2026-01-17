@@ -6,7 +6,7 @@ import jakarta.persistence.*;
 import java.util.Objects;
 
 @Entity
-@Table(name = "documento")
+@Table(name = "conversa")
 public class Conversa {
 
     @Id

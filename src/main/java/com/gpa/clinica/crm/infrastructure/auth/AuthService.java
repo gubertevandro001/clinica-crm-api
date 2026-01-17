@@ -2,6 +2,7 @@ package com.gpa.clinica.crm.infrastructure.auth;
 
 import com.gpa.clinica.crm.domain.entity.Usuario;
 import com.gpa.clinica.crm.domain.repository.UsuarioRepository;
+import com.gpa.clinica.crm.domain.valueobject.Role;
 import com.gpa.clinica.crm.infrastructure.auth.model.RegisterRequest;
 import com.gpa.clinica.crm.infrastructure.auth.model.RegisterResponse;
 import com.gpa.clinica.crm.infrastructure.config.security.TokenService;
@@ -50,6 +51,7 @@ public class AuthService {
                 .cpf(registerRequest.cpf())
                 .email(registerRequest.email())
                 .login(registerRequest.login())
+                .role(Role.ESTETICISTA)
                 .senha(passwordEncoder.encode(registerRequest.senha()))
                 .build();
 

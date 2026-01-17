@@ -48,7 +48,7 @@ public class HabitosDiarios {
     @Column(name = "qualidade_sono")
     private Boolean qualidadeSono;
 
-    @Column(name = "horos_sono")
+    @Column(name = "horas_sono")
     private Integer horasSono;
 
     @Column(name = "ingestao_agua_copos_dia")
@@ -92,6 +92,8 @@ public class HabitosDiarios {
 
     @Column(name = "anotacoes")
     private String anotacoes;
+
+    public HabitosDiarios() {}
 
     public HabitosDiarios(Boolean tratamentoEsteticoAnterior, String tratamentoEsteticoDescricao,
                           Boolean usaLentesDeContato, Boolean utilizaComesticos, String cosmeticosDescricao,
