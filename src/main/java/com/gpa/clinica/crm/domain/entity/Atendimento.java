@@ -4,6 +4,8 @@ import jakarta.persistence.*;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 @Entity
@@ -23,6 +25,9 @@ public class Atendimento {
     @ManyToOne
     @JoinColumn(name = "paciente_id")
     private Paciente paciente;
+
+    @OneToMany(mappedBy = "atendimento")
+    private List<ProcedimentoAtendimento> procedimentos = new ArrayList<>();
 
     @Override
     public boolean equals(Object o) {
