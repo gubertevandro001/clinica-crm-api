@@ -24,6 +24,8 @@ public class Conversa {
     @JoinColumn(name = "usuario_id")
     private Usuario usuario;
 
+    protected Conversa() {}
+
     public String getId() {
         return id;
     }
@@ -34,10 +36,6 @@ public class Conversa {
 
     public String getConteudo() {
         return conteudo;
-    }
-
-    public void setConteudo(String conteudo) {
-        this.conteudo = conteudo;
     }
 
     public Paciente getPaciente() {

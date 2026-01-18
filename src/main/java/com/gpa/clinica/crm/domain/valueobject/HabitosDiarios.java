@@ -93,7 +93,7 @@ public class HabitosDiarios {
     @Column(name = "anotacoes")
     private String anotacoes;
 
-    public HabitosDiarios() {}
+    protected HabitosDiarios() {}
 
     public HabitosDiarios(Boolean tratamentoEsteticoAnterior, String tratamentoEsteticoDescricao,
                           Boolean usaLentesDeContato, Boolean utilizaComesticos, String cosmeticosDescricao,

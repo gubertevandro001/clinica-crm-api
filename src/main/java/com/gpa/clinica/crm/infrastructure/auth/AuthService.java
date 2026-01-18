@@ -37,7 +37,7 @@ public class AuthService {
         return tokenService.obterToken(refreshToken);
     }
 
-    public RegisterResponse register(RegisterRequest registerRequest) {
+    public void register(RegisterRequest registerRequest) {
         if (usuarioRepository.existsByEmail(registerRequest.email())) {
             throw new RuntimeException("Email já está em uso!");
         }
@@ -56,8 +56,6 @@ public class AuthService {
                 .build();
 
         usuarioRepository.save(usuario);
-
-        return new RegisterResponse(usuario.getId(), "Usuário registrado com sucesso!");
     }
 }
 

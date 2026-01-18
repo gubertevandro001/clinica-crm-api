@@ -36,7 +36,7 @@ public class Usuario {
     @Enumerated(EnumType.STRING)
     private Role role;
 
-    public Usuario() {}
+    protected Usuario() {}
 
     public Usuario(String id, String nome, String cpf, String email, String login, String senha, boolean ativo, Role role) {
         this.id = id;

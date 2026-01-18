@@ -95,5 +95,5 @@ public class HistoricoClinico {
     @Column(name = "doenca_descricao")
     private String doencaDescricao;
 
-    public HistoricoClinico() {}
+    protected HistoricoClinico() {}
 }

@@ -49,7 +49,7 @@ public class Paciente {
     @OneToMany(mappedBy = "paciente", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Conversa> conversas = new ArrayList<>();
 
-    public Paciente() {}
+    protected Paciente() {}
 
     public Paciente(String nome, String cpf, Integer idade, LocalDate dataNascimento,
                     String profissao, String estadoCivil, Endereco endereco, Contato contato, Anamnese anamnese) {

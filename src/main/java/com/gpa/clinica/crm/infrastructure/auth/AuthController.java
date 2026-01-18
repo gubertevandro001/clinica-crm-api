@@ -20,7 +20,7 @@ public class AuthController implements AuthControllerOpenAPI {
         return RefreshResponse.aPartirDe(authService.refresh(refreshRequest.refreshToken()));
     }
 
-    public RegisterResponse register(RegisterRequest registerRequest) {
-        return authService.register(registerRequest);
+    public void register(RegisterRequest registerRequest) {
+        authService.register(registerRequest);
     }
 }

@@ -6,16 +6,15 @@ server:
 spring:
   application:
     name: clinica-crm-api
+
   datasource:
-    url: jdbc:sqlserver://localhost:1433;databaseName=DB_CLINICA;encrypt=false
-    username: sa
-    password: Clinica#!
+    url: ${DB_URI}
+    username: ${DB_USER}
+    password: ${DB_PASSWORD}
     jpa:
       generate-ddl: false
       hibernate:
         ddl-auto: none
-        naming:
-          physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
       show-sql: false
       properties:
         hibernate:
@@ -23,9 +22,9 @@ spring:
           globally_quoted_identifiers: true
     flyway:
       enabled: true
-      url: jdbc:sqlserver://localhost:1433;databaseName=DB_CLINICA;encrypt=false
-      user: sa
-      password: Clinica#!
+      url: ${DB_URI}
+      user: ${DB_USER}
+      password: ${DB_PASSWORD}
       locations: classpath:db/migration
 
 springdoc:
@@ -37,5 +36,5 @@ springdoc:
 api:
   security:
     jwt:
-      secret-key: D41D8CD98F00B204E9800998ECF8427E
-      issuer: clinica-crm-api
+      secret-key: ${JWT_SECRET}
+      issuer: ${JWT_ISSUER}

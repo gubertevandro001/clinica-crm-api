@@ -30,7 +30,7 @@ public class TratamentoEsteticoCirurgico {
     @Column(name = "cirurgia_reparadora_descricao")
     private String cirurgiaReparadoraDescricao;
 
-    public TratamentoEsteticoCirurgico() {}
+    protected TratamentoEsteticoCirurgico() {}
 
     public TratamentoEsteticoCirurgico(Boolean implanteDentario, String implanteDentarioDescricao,
                                        Boolean tratamentoEstetico, String tratamentoEsteticoDescricao,

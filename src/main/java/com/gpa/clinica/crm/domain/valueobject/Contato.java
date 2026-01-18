@@ -15,7 +15,7 @@ public class Contato {
     @Column(name = "email")
     private String email;
 
-    public Contato() {}
+    protected Contato() {}
 
     public Contato(String telefone, String celular, String email) {
         this.telefone = telefone;
@@ -27,16 +27,8 @@ public class Contato {
         return telefone;
     }
 
-    public void setTelefone(String telefone) {
-        this.telefone = telefone;
-    }
-
     public String getCelular() {
         return celular;
-    }
-
-    public void setCelular(String celular) {
-        this.celular = celular;
     }
 
     public String getEmail() {

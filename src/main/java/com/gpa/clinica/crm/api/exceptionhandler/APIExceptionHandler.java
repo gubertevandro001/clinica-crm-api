@@ -5,26 +5,39 @@ import com.gpa.clinica.crm.domain.exception.EntidadeNaoEncontradaException;
 import io.swagger.v3.oas.annotations.Hidden;
 import lombok.AllArgsConstructor;
 import org.jspecify.annotations.Nullable;
+import org.springframework.context.MessageSource;
+import org.springframework.context.i18n.LocaleContextHolder;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.FieldError;
+import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
 
+import java.text.DateFormat;
+import java.util.List;
+import java.util.stream.Collectors;
+
 @Hidden
 @RestControllerAdvice
-@AllArgsConstructor
 public class APIExceptionHandler extends ResponseEntityExceptionHandler {
 
-    private static final String MSG_ERRO_GENERICA_USUARIO_FINAL = "Ocorreu um erro interno inesperado no sistema. Tente" +
-            "novamente e se o problema persistir, entre em contato com o administrador do sistema.";
+    private final MessageSource messageSource;
 
+    public APIExceptionHandler(MessageSource messageSource) {
+        this.messageSource = messageSource;
+    }
+
+    private static final String MSG_ERRO_GENERICA_USUARIO_FINAL = "Ocorreu um erro interno inesperado no sistema. Tente" +
+            " novamente e se o problema persistir, entre em contato com o administrador do sistema.";
 
     @ExceptionHandler(Exception.class)
     @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
@@ -62,6 +75,40 @@ public class APIExceptionHandler extends ResponseEntityExceptionHandler {
         final var problem = new Problem(HttpStatus.UNAUTHORIZED.value(), title, ex.getMessage());
 
         return handleExceptionInternal(ex, problem, new HttpHeaders(), HttpStatus.UNAUTHORIZED, request);
+    }
+
+    @Override
+    protected @Nullable ResponseEntity<Object> handleMethodArgumentNotValid(MethodArgumentNotValidException ex,
+                                                                            HttpHeaders headers, HttpStatusCode status,
+                                                                            WebRequest request) {
+        return handleValidationInternal(ex, ex.getBindingResult(), headers, status, request);
+    }
+
+    private ResponseEntity<Object> handleValidationInternal(Exception ex, BindingResult bindingResult, HttpHeaders headers,
+                                                            HttpStatusCode status, WebRequest request) {
+
+        final var title = "Dados Inválidos!";
+        String detail = "Um ou mais campos estão inválidos. Faça o preenchimento correto e tente novamente.";
+
+        List<com.gpa.clinica.crm.api.exceptionhandler.FieldError> problemObjects = bindingResult.getAllErrors().stream()
+                .map(objectError -> {
+                    String message = messageSource.getMessage(objectError, LocaleContextHolder.getLocale());
+
+                    String name = objectError.getObjectName();
+
+                    if (objectError instanceof org.springframework.validation.FieldError) {
+                        name = ((FieldError) objectError).getField();
+                    }
+
+                    return new com.gpa.clinica.crm.api.exceptionhandler.FieldError(name, message);
+
+                })
+                .collect(Collectors.toList());
+
+        Problem problem = new Problem(status.value(), title, detail);
+        problem.setFieldErrors(problemObjects);
+
+        return handleExceptionInternal(ex, problem, headers, status, request);
     }
 
     @Override
