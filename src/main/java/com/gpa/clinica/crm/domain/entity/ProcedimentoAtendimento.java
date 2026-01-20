@@ -1,5 +1,6 @@
 package com.gpa.clinica.crm.domain.entity;
 
+import com.gpa.clinica.crm.domain.util.IdGenerator;
 import jakarta.persistence.*;
 
 import java.math.BigDecimal;
@@ -20,10 +21,20 @@ public class ProcedimentoAtendimento {
     @JoinColumn(name = "procedimento_id")
     private Procedimento procedimento;
 
-    @Column(name = "valor")
+    @Column(name = "valor", precision = 15, scale = 2)
     private BigDecimal valor;
 
-    protected ProcedimentoAtendimento() {
+    protected ProcedimentoAtendimento() {}
+
+    private ProcedimentoAtendimento(Atendimento atendimento, Procedimento procedimento) {
+        this.id = IdGenerator.generateId();
+        this.atendimento = atendimento;
+        this.procedimento = procedimento;
+        this.valor = procedimento.getValor();
+    }
+
+    public static ProcedimentoAtendimento novoProcedimentoAtendimento(Atendimento atendimento, Procedimento procedimento) {
+        return new ProcedimentoAtendimento(atendimento, procedimento);
     }
 
     public String getId() {

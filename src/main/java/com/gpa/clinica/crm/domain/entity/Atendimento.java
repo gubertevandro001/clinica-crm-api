@@ -1,5 +1,6 @@
 package com.gpa.clinica.crm.domain.entity;
 
+import com.gpa.clinica.crm.domain.util.IdGenerator;
 import jakarta.persistence.*;
 
 import java.math.BigDecimal;
@@ -16,6 +17,9 @@ public class Atendimento {
     @Column(name = "id")
     private String id;
 
+    @Column(name = "codigo")
+    private String codigo;
+
     @Column(name = "data_atendimento")
     private LocalDate dataAtendimento;
 
@@ -26,8 +30,49 @@ public class Atendimento {
     @JoinColumn(name = "paciente_id")
     private Paciente paciente;
 
+    @ManyToOne
+    @JoinColumn(name = "usuario_id")
+    private Usuario usuario;
+
     @OneToMany(mappedBy = "atendimento")
     private List<ProcedimentoAtendimento> procedimentos = new ArrayList<>();
+
+    protected Atendimento() {
+    }
+
+    private Atendimento(Paciente paciente, Usuario usuario) {
+        this.id = IdGenerator.generateId();
+        this.codigo = IdGenerator.generateCode();
+        this.dataAtendimento = LocalDate.now();
+        this.paciente = paciente;
+        this.valor = BigDecimal.ZERO;
+        this.usuario = usuario;
+    }
+
+    public static Atendimento novoAtendimento(Paciente paciente, Usuario usuario) {
+        return new Atendimento(paciente, usuario);
+    }
+
+    public void adicionarProcedimentos(List<ProcedimentoAtendimento> procedimentos) {
+        this.procedimentos.addAll(procedimentos);
+        calcularValor();
+    }
+
+    public void adicionarProcedimento(ProcedimentoAtendimento procedimento) {
+        this.procedimentos.add(procedimento);
+        calcularValor();
+    }
+
+    public void removerProcedimento(String procedimentoId) {
+        this.procedimentos.removeIf(procedimento -> procedimento.getId().equals(procedimentoId));
+        calcularValor();
+    }
+
+    public void calcularValor() {
+        this.valor = this.procedimentos.stream()
+                .map(ProcedimentoAtendimento::getValor)
+                .reduce(BigDecimal.ZERO, BigDecimal::add);
+    }
 
     @Override
     public boolean equals(Object o) {

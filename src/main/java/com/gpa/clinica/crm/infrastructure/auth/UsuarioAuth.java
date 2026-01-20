@@ -1,6 +1,7 @@
 package com.gpa.clinica.crm.infrastructure.auth;
 
 import com.gpa.clinica.crm.domain.entity.Usuario;
+import com.gpa.clinica.crm.domain.valueobject.Role;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -37,6 +38,10 @@ public class UsuarioAuth implements UserDetails {
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         return Collections.singleton(new SimpleGrantedAuthority(usuario.getRole().getDescricao()));
+    }
+
+    public Role getRole() {
+        return usuario.getRole();
     }
 
     @Override
