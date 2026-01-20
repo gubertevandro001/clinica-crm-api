@@ -8,6 +8,7 @@ import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -16,6 +17,7 @@ import java.util.List;
 public interface PacienteControllerOpenAPI {
 
     @GetMapping("/{pacienteId}")
+    @ResponseStatus(HttpStatus.OK)
     @Operation(summary = "Realiza a busca de um paciente pelo id")
     @ApiResponse(responseCode = "200", description = "Paciente retornado com sucesso!")
     @ApiResponse(responseCode = "404", description = "Paciente não encontrado")
@@ -24,6 +26,7 @@ public interface PacienteControllerOpenAPI {
     public PacienteResponse buscarPacientePorId(@PathVariable("pacienteId") String pacienteId);
 
     @GetMapping
+    @ResponseStatus(HttpStatus.OK)
     @Operation(summary = "Realiza a busca de pacientes a partir dos filtros passados")
     @ApiResponse(responseCode = "200", description = "Pacientes retornados com sucesso!")
     @ApiResponse(responseCode = "400", description = "Erro de validação")
@@ -33,6 +36,7 @@ public interface PacienteControllerOpenAPI {
                                                                    @RequestParam(required = false) String filtro);
 
     @PostMapping
+    @ResponseStatus(HttpStatus.CREATED)
     @Operation(summary = "Realiza o cadastro completo do paciente")
     @ApiResponse(responseCode = "201", description = "Paciente cadastrado com sucesso!")
     @ApiResponse(responseCode = "400", description = "Erro de validação")
@@ -40,6 +44,7 @@ public interface PacienteControllerOpenAPI {
     public PacienteResponse cadastrarPaciente(@RequestBody @Valid CadastrarPacienteRequest cadastrarPacienteRequest);
 
     @PutMapping("/{pacienteId}")
+    @ResponseStatus(HttpStatus.OK)
     @Operation(summary = "Realiza a atualização do cadastro do paciente")
     @ApiResponse(responseCode = "200", description = "Paciente atualizado com sucesso!")
     @ApiResponse(responseCode = "400", description = "Erro de validação")

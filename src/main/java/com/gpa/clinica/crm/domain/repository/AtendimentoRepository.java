@@ -1,16 +1,13 @@
 package com.gpa.clinica.crm.domain.repository;
 
 import com.gpa.clinica.crm.domain.entity.Atendimento;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 
-import java.util.List;
 import java.util.Optional;
 
-public interface AtendimentoRepository extends JpaRepository<Atendimento, String> {
+public interface AtendimentoRepository extends JpaRepository<Atendimento, String>, JpaSpecificationExecutor<Atendimento> {
 
     Optional<Atendimento> findByIdAndUsuarioId(String id, String usuarioId);
 
-    Page<Atendimento> findAllByUsuarioId(String usuarioId, Pageable pageable);
 }

@@ -8,5 +8,5 @@ CREATE TABLE atendimento_procedimento
     CONSTRAINT PK_atendimento_procedimento PRIMARY KEY (id),
 
     CONSTRAINT FK_at_proc_procedimento FOREIGN KEY (procedimento_id) REFERENCES procedimento (id),
-    CONSTRAINT FK_at_proc_atendimento FOREIGN KEY (usuario_id) REFERENCES atendimento (id)
+    CONSTRAINT FK_at_proc_atendimento FOREIGN KEY (atendimento_id) REFERENCES atendimento (id)
 );

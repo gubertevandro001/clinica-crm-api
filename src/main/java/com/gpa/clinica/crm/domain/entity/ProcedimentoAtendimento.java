@@ -7,14 +7,14 @@ import java.math.BigDecimal;
 import java.util.Objects;
 
 @Entity
-@Table(name = "procedimento_atendimento")
+@Table(name = "atendimento_procedimento")
 public class ProcedimentoAtendimento {
 
     @Id
     private String id;
 
     @ManyToOne
-    @JoinColumn(name = "paciente_id")
+    @JoinColumn(name = "atendimento_id")
     private Atendimento atendimento;
 
     @ManyToOne

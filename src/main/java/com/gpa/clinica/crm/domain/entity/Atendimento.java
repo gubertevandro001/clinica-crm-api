@@ -1,5 +1,6 @@
 package com.gpa.clinica.crm.domain.entity;
 
+import com.gpa.clinica.crm.domain.exception.DomainException;
 import com.gpa.clinica.crm.domain.util.IdGenerator;
 import jakarta.persistence.*;
 
@@ -34,11 +35,10 @@ public class Atendimento {
     @JoinColumn(name = "usuario_id")
     private Usuario usuario;
 
-    @OneToMany(mappedBy = "atendimento")
+    @OneToMany(mappedBy = "atendimento", cascade = CascadeType.ALL)
     private List<ProcedimentoAtendimento> procedimentos = new ArrayList<>();
 
-    protected Atendimento() {
-    }
+    protected Atendimento() {}
 
     private Atendimento(Paciente paciente, Usuario usuario) {
         this.id = IdGenerator.generateId();
@@ -65,6 +65,9 @@ public class Atendimento {
 
     public void removerProcedimento(String procedimentoId) {
         this.procedimentos.removeIf(procedimento -> procedimento.getId().equals(procedimentoId));
+        if (this.procedimentos.isEmpty()) {
+            throw new DomainException("Lista de procedimentos não pode ser vazia!");
+        }
         calcularValor();
     }
 
@@ -84,5 +87,33 @@ public class Atendimento {
     @Override
     public int hashCode() {
         return Objects.hashCode(id);
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public String getCodigo() {
+        return codigo;
+    }
+
+    public LocalDate getDataAtendimento() {
+        return dataAtendimento;
+    }
+
+    public BigDecimal getValor() {
+        return valor;
+    }
+
+    public Paciente getPaciente() {
+        return paciente;
+    }
+
+    public Usuario getUsuario() {
+        return usuario;
+    }
+
+    public List<ProcedimentoAtendimento> getProcedimentos() {
+        return procedimentos;
     }
 }

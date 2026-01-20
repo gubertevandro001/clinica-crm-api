@@ -1,15 +1,18 @@
 package com.gpa.clinica.crm.domain.service;
 
 import com.gpa.clinica.crm.api.model.request.CadastrarAtendimentoRequest;
+import com.gpa.clinica.crm.api.model.request.PageableAtendimentoRequest;
 import com.gpa.clinica.crm.api.model.request.ProcedimentoIdRequest;
 import com.gpa.clinica.crm.domain.entity.*;
 import com.gpa.clinica.crm.domain.exception.AtendimentoNaoEncontradoException;
 import com.gpa.clinica.crm.domain.repository.AtendimentoRepository;
 import com.gpa.clinica.crm.domain.util.LoggedUser;
+import com.gpa.clinica.crm.infrastructure.spec.BuscaAtendimentosSpecification;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -36,7 +39,20 @@ public class AtendimentoService {
         return buscarAtendimentoDoUsuario(atendimentoId, LoggedUser.getId());
     }
 
+    public Page<Atendimento> buscarPorFiltro(PageableAtendimentoRequest request) {
+        Pageable pageable = PageRequest.of(request.numeroDaPagina() - 1, request.registrosPorPagina());
 
+        var filtro = BuscaAtendimentosSpecification.buscarPor(
+                LoggedUser.ehAdministrador() ? null : LoggedUser.getId(),
+                request.nome(),
+                request.dataInicio(),
+                request.dataFim()
+        );
+
+        return atendimentoRepository.findAll(filtro, pageable);
+    }
+
+    @Transactional
     public Atendimento cadastrar(CadastrarAtendimentoRequest request) {
         Paciente paciente = pacienteService.buscarPorId(request.pacienteId());
         Usuario usuario = usuarioService.buscarPorId(LoggedUser.getId());

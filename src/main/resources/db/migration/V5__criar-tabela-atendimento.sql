@@ -1,6 +1,7 @@
 CREATE TABLE atendimento
 (
     id               VARCHAR(36)    NOT NULL,
+    codigo           VARCHAR(36)    NOT NULL,
     data_atendimento DATE           NOT NULL,
     valor            DECIMAL(15, 2) NOT NULL,
     paciente_id      VARCHAR(36)    NOT NULL,
