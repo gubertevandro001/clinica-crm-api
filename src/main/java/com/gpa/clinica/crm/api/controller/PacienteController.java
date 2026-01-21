@@ -7,11 +7,8 @@ import com.gpa.clinica.crm.api.model.request.PageableRequest;
 import com.gpa.clinica.crm.api.model.response.PacientePageableResponse;
 import com.gpa.clinica.crm.api.model.response.PacienteResponse;
 import com.gpa.clinica.crm.domain.service.PacienteService;
-import org.springframework.data.domain.PageRequest;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-
-import java.util.List;
 
 @RestController
 @RequestMapping("/pacientes")

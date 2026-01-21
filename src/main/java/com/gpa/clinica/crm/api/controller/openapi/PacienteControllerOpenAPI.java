@@ -11,8 +11,6 @@ import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
-
 @Tag(name = "Pacientes", description = "Gerencia os pacientes")
 public interface PacienteControllerOpenAPI {
 
