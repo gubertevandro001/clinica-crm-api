@@ -6,7 +6,7 @@ import com.gpa.clinica.crm.api.model.request.ProcedimentoIdRequest;
 import com.gpa.clinica.crm.domain.entity.*;
 import com.gpa.clinica.crm.domain.exception.AtendimentoNaoEncontradoException;
 import com.gpa.clinica.crm.domain.repository.AtendimentoRepository;
-import com.gpa.clinica.crm.domain.util.LoggedUser;
+import com.gpa.clinica.crm.infrastructure.auth.LoggedUser;
 import com.gpa.clinica.crm.infrastructure.spec.BuscaAtendimentosSpecification;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;

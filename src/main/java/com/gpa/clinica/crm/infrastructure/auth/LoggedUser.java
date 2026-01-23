@@ -1,7 +1,6 @@
-package com.gpa.clinica.crm.domain.util;
+package com.gpa.clinica.crm.infrastructure.auth;
 
 import com.gpa.clinica.crm.domain.valueobject.Role;
-import com.gpa.clinica.crm.infrastructure.auth.UsuarioAuth;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Component;
