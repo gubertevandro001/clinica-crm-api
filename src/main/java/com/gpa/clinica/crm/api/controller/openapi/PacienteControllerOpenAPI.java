@@ -16,7 +16,7 @@ public interface PacienteControllerOpenAPI {
 
     @GetMapping("/{pacienteId}")
     @ResponseStatus(HttpStatus.OK)
-    @Operation(summary = "Realiza a busca de um paciente pelo id")
+    @Operation(summary = "Realiza a busca de um paciente pelo seu id")
     @ApiResponse(responseCode = "200", description = "Paciente retornado com sucesso!")
     @ApiResponse(responseCode = "404", description = "Paciente não encontrado")
     @ApiResponse(responseCode = "400", description = "Erro de validação")
