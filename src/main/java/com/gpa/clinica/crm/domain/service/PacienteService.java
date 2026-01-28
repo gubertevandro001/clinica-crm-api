@@ -26,10 +26,13 @@ public class PacienteService {
 
     private final PacienteRepository pacienteRepository;
     private final UsuarioService usuarioService;
+    private final UsuarioLogadoService usuarioLogadoService;
 
-    public PacienteService(PacienteRepository pacienteRepository, UsuarioService usuarioService) {
+    public PacienteService(PacienteRepository pacienteRepository, UsuarioService usuarioService,
+                           UsuarioLogadoService usuarioLogadoService) {
         this.pacienteRepository = pacienteRepository;
         this.usuarioService = usuarioService;
+        this.usuarioLogadoService = usuarioLogadoService;
     }
 
     public Paciente buscarPorId(String pacienteId) {
@@ -65,7 +68,7 @@ public class PacienteService {
     @Transactional
     public void adicionarConversa(String pacienteId, MultipartFile arquivoDaConversa) {
         Paciente paciente = buscarPorId(pacienteId);
-        Usuario usuario = usuarioService.buscarPorId(LoggedUser.getId());
+        Usuario usuario = usuarioService.buscarPorId(usuarioLogadoService.getId());
 
         Conversa conversa = Conversa.novaConversa(TextExtractor.extract(arquivoDaConversa), paciente, usuario);
 

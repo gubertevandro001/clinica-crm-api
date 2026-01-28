@@ -1,6 +1,7 @@
 package com.gpa.clinica.crm.domain.entity;
 
 import com.gpa.clinica.crm.domain.util.IdGenerator;
+import com.gpa.clinica.crm.domain.valueobject.TipoProcedimeno;
 import jakarta.persistence.*;
 
 import java.math.BigDecimal;
@@ -21,15 +22,15 @@ public class Procedimento {
     private String descricao;
 
     @Column(name = "tipo")
-    private String tipo;
+    @Enumerated(EnumType.STRING)
+    private TipoProcedimeno tipo;
 
     @Column(name = "valor", precision = 15, scale = 2)
     private BigDecimal valor;
 
-    protected Procedimento() {
-    }
+    protected Procedimento() {}
 
-    private Procedimento(String nome, String descricao, String tipo, BigDecimal valor) {
+    private Procedimento(String nome, String descricao, TipoProcedimeno tipo, BigDecimal valor) {
         this.id = IdGenerator.generateId();
         this.nome = nome;
         this.descricao = descricao;
@@ -37,7 +38,8 @@ public class Procedimento {
         this.valor = valor;
     }
 
-    public static Procedimento novoProcedimento(String nome, String descricao, String tipo, BigDecimal valor) {
+    public static Procedimento novoProcedimento(String nome, String descricao, TipoProcedimeno tipo,
+                                                BigDecimal valor) {
         return new Procedimento(nome, descricao, tipo, valor);
     }
 
@@ -53,7 +55,7 @@ public class Procedimento {
         return descricao;
     }
 
-    public String getTipo() {
+    public TipoProcedimeno getTipo() {
         return tipo;
     }
 

@@ -10,9 +10,11 @@ import org.springframework.stereotype.Service;
 public class UsuarioService {
 
     private final UsuarioRepository usuarioRepository;
+    private final UsuarioLogadoService usuarioLogadoService;
 
-    public UsuarioService(UsuarioRepository usuarioRepository) {
+    public UsuarioService(UsuarioRepository usuarioRepository,  UsuarioLogadoService usuarioLogadoService) {
         this.usuarioRepository = usuarioRepository;
+        this.usuarioLogadoService = usuarioLogadoService;
     }
 
     public Usuario buscarPorId(String id) {
@@ -20,7 +22,7 @@ public class UsuarioService {
     }
 
     public Usuario buscarUsuarioLogado() {
-        return usuarioRepository.findById(LoggedUser.getId())
-                .orElseThrow(() -> new UsuarioNaoEncontradoException(LoggedUser.getId()));
+        return usuarioRepository.findById(usuarioLogadoService.getId())
+                .orElseThrow(() -> new UsuarioNaoEncontradoException(usuarioLogadoService.getId()));
     }
 }

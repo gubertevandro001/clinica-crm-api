@@ -23,27 +23,29 @@ public class AtendimentoService {
     private final ProcedimentoService procedimentoService;
     private final PacienteService pacienteService;
     private final UsuarioService usuarioService;
+    private final UsuarioLogadoService usuarioLogadoService;
 
     public AtendimentoService(AtendimentoRepository atendimentoRepository, ProcedimentoService procedimentoService,
-                              PacienteService pacienteService, UsuarioService usuarioService) {
+                              PacienteService pacienteService, UsuarioService usuarioService, UsuarioLogadoService usuarioLogadoService) {
         this.atendimentoRepository = atendimentoRepository;
         this.procedimentoService = procedimentoService;
         this.pacienteService = pacienteService;
         this.usuarioService = usuarioService;
+        this.usuarioLogadoService = usuarioLogadoService;
     }
 
     public Atendimento buscarPorId(String atendimentoId) {
-        if (LoggedUser.ehAdministrador()) {
+        if (usuarioLogadoService.ehAdministrador()) {
             return buscarAtendimento(atendimentoId);
         }
-        return buscarAtendimentoDoUsuario(atendimentoId, LoggedUser.getId());
+        return buscarAtendimentoDoUsuario(atendimentoId, usuarioLogadoService.getId());
     }
 
     public Page<Atendimento> buscarPorFiltro(PageableAtendimentoRequest request) {
         Pageable pageable = PageRequest.of(request.numeroDaPagina() - 1, request.registrosPorPagina());
 
         var filtro = BuscaAtendimentosSpecification.buscarPor(
-                LoggedUser.ehAdministrador() ? null : LoggedUser.getId(),
+                usuarioLogadoService.ehAdministrador() ? null : usuarioLogadoService.getId(),
                 request.nome(),
                 request.dataInicio(),
                 request.dataFim()
@@ -55,7 +57,7 @@ public class AtendimentoService {
     @Transactional
     public Atendimento cadastrar(CadastrarAtendimentoRequest request) {
         Paciente paciente = pacienteService.buscarPorId(request.pacienteId());
-        Usuario usuario = usuarioService.buscarPorId(LoggedUser.getId());
+        Usuario usuario = usuarioService.buscarPorId(usuarioLogadoService.getId());
 
         Atendimento atendimento = Atendimento.novoAtendimento(paciente, usuario);
 

@@ -17,7 +17,7 @@ public record ProcedimentoResponse(
                 procedimento.getId(),
                 procedimento.getNome(),
                 procedimento.getDescricao(),
-                procedimento.getTipo(),
+                procedimento.getTipo().name(),
                 procedimento.getValor()
         );
     }
