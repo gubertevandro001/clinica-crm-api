@@ -6,7 +6,6 @@ import com.gpa.clinica.crm.api.model.request.ProcedimentoIdRequest;
 import com.gpa.clinica.crm.domain.entity.*;
 import com.gpa.clinica.crm.domain.exception.AtendimentoNaoEncontradoException;
 import com.gpa.clinica.crm.domain.repository.AtendimentoRepository;
-import com.gpa.clinica.crm.infrastructure.auth.LoggedUser;
 import com.gpa.clinica.crm.infrastructure.spec.BuscaAtendimentosSpecification;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -61,7 +60,7 @@ public class AtendimentoService {
 
         Atendimento atendimento = Atendimento.novoAtendimento(paciente, usuario);
 
-        List<ProcedimentoAtendimento> procedimentos = validarProcedimentos(atendimento, request.procedimentos());
+        List<ProcedimentoAtendimento> procedimentos = criarProcedimentos(atendimento, request.procedimentos());
 
         atendimento.adicionarProcedimentos(procedimentos);
 
@@ -83,8 +82,8 @@ public class AtendimentoService {
         atendimentoRepository.save(atendimento);
     }
 
-    private List<ProcedimentoAtendimento> validarProcedimentos(Atendimento atendimento,
-                                                               List<ProcedimentoIdRequest> procedimentos) {
+    private List<ProcedimentoAtendimento> criarProcedimentos(Atendimento atendimento,
+                                                             List<ProcedimentoIdRequest> procedimentos) {
         return procedimentos.stream().map(proc -> {
             Procedimento procedimento = procedimentoService.buscarPorId(proc.id());
             return ProcedimentoAtendimento.novoProcedimentoAtendimento(atendimento, procedimento);
