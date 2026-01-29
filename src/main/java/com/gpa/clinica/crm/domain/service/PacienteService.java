@@ -12,7 +12,6 @@ import com.gpa.clinica.crm.domain.entity.Paciente;
 import com.gpa.clinica.crm.domain.entity.Usuario;
 import com.gpa.clinica.crm.domain.repository.PacienteRepository;
 import com.gpa.clinica.crm.domain.util.TextExtractor;
-import com.gpa.clinica.crm.infrastructure.auth.LoggedUser;
 import com.gpa.clinica.crm.infrastructure.spec.BuscaPacientesSpecification;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
