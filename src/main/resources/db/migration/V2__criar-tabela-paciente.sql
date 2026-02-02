@@ -1,6 +1,6 @@
 CREATE TABLE paciente
 (
-    id                   VARCHAR(36) NOT NULL,
+    id                   VARCHAR(32) NOT NULL,
     nome                 VARCHAR(255),
     cpf                  VARCHAR(20),
     idade                INT,
@@ -17,7 +17,7 @@ CREATE TABLE paciente
     telefone             VARCHAR(20),
     celular              VARCHAR(20),
     email                VARCHAR(255),
-    anamnese_id          VARCHAR(36),
+    anamnese_id          VARCHAR(32),
 
     CONSTRAINT PK_paciente PRIMARY KEY (id),
 

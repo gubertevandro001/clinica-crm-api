@@ -1,11 +1,11 @@
 CREATE TABLE atendimento
 (
-    id               VARCHAR(36)    NOT NULL,
-    codigo           VARCHAR(36)    NOT NULL,
+    id               VARCHAR(32)    NOT NULL,
+    codigo           VARCHAR(32)    NOT NULL,
     data_atendimento DATE           NOT NULL,
     valor            DECIMAL(15, 2) NOT NULL,
-    paciente_id      VARCHAR(36)    NOT NULL,
-    usuario_id       VARCHAR(36)    NOT NULL,
+    paciente_id      VARCHAR(32)    NOT NULL,
+    usuario_id       VARCHAR(32)    NOT NULL,
 
     CONSTRAINT PK_atendimento PRIMARY KEY (id),
 

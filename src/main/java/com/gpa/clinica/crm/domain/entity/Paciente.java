@@ -7,6 +7,7 @@ import jakarta.persistence.*;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
 
@@ -48,6 +49,9 @@ public class Paciente {
 
     @OneToMany(mappedBy = "paciente", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Conversa> conversas = new ArrayList<>();
+
+    @OneToMany(mappedBy = "paciente",  cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Analise>  analises = new ArrayList<>();
 
     protected Paciente() {}
 
@@ -119,12 +123,19 @@ public class Paciente {
     }
 
     public List<Conversa> getConversas() {
-        return conversas;
+        return Collections.unmodifiableList(conversas);
+    }
+
+    public List<Analise> getAnalises() {
+        return Collections.unmodifiableList(analises);
     }
 
     public void adicionarConversa(Conversa conversa){
         conversas.add(conversa);
-        conversa.setPaciente(this);
+    }
+
+    public void adicionarAnalise(Analise analise){
+        getAnalises().add(analise);
     }
 
     @Override

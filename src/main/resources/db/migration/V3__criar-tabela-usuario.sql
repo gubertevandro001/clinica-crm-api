@@ -1,6 +1,6 @@
 CREATE TABLE usuario
 (
-    id       VARCHAR(36)  NOT NULL,
+    id       VARCHAR(32)  NOT NULL,
     nome     VARCHAR(150) NOT NULL,
     cpf      VARCHAR(14)  NOT NULL,
     email    VARCHAR(150) NOT NULL,

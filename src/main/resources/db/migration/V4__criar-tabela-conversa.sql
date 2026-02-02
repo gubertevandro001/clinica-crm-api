@@ -1,9 +1,9 @@
 CREATE TABLE conversa
 (
-    id          VARCHAR(36) NOT NULL,
+    id          VARCHAR(32) NOT NULL,
     conteudo    NVARCHAR(MAX) NOT NULL,
-    paciente_id VARCHAR(36) NOT NULL,
-    usuario_id  VARCHAR(36) NOT NULL
+    paciente_id VARCHAR(32) NOT NULL,
+    usuario_id  VARCHAR(32) NOT NULL
 
     CONSTRAINT PK_conversa PRIMARY KEY (id),
 

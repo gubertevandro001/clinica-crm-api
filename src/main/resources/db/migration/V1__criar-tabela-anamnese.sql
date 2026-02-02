@@ -1,6 +1,6 @@
 CREATE TABLE anamnese
 (
-    id                                     VARCHAR(36) NOT NULL,
+    id                                     VARCHAR(32) NOT NULL,
     tratamento_estetico_anterior           BIT NULL,
     tratamento_estetico_anterior_descricao VARCHAR(255) NULL,
     usa_lentes_contato                     BIT NULL,

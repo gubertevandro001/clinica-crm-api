@@ -1,8 +1,8 @@
 CREATE TABLE atendimento_procedimento
 (
-    id              VARCHAR(36)    NOT NULL,
-    procedimento_id VARCHAR(36)    NOT NULL,
-    atendimento_id  VARCHAR(36)    NOT NULL,
+    id              VARCHAR(32)    NOT NULL,
+    procedimento_id VARCHAR(32)    NOT NULL,
+    atendimento_id  VARCHAR(32)    NOT NULL,
     valor           DECIMAL(15, 2) NOT NULL,
 
     CONSTRAINT PK_atendimento_procedimento PRIMARY KEY (id),
