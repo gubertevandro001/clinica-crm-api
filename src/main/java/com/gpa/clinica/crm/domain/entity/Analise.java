@@ -28,8 +28,7 @@ public class Analise {
     @Column(name = "data_analise")
     private LocalDateTime dataAnalise;
 
-    protected Analise() {
-    }
+    protected Analise() {}
 
     public Analise(Paciente paciente, Usuario usuario, String conteudo) {
         this.id = IdGenerator.generateId();

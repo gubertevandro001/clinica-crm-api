@@ -6,6 +6,8 @@ server:
 spring:
   application:
     name: clinica-crm-api
+  jpa:
+    open-in-view: false
 
   datasource:
     url: ${DB_URI}

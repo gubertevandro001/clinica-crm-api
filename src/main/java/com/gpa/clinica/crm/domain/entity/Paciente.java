@@ -43,7 +43,7 @@ public class Paciente {
     @Embedded
     private Contato contato;
 
-    @OneToOne(cascade = CascadeType.ALL)
+    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @JoinColumn(name = "anamnese_id")
     private Anamnese anamnese;
 

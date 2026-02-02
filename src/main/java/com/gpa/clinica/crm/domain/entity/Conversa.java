@@ -54,15 +54,15 @@ public class Conversa {
         this.usuario = usuario;
     }
 
-    private Conversa(String id, String conteudo, Paciente paciente, Usuario usuario) {
-        this.id = id;
+    private Conversa(String conteudo, Paciente paciente, Usuario usuario) {
+        this.id = IdGenerator.generateId();
         this.conteudo = conteudo;
         this.paciente = paciente;
         this.usuario = usuario;
     }
 
     public static Conversa novaConversa(String conteudo, Paciente paciente, Usuario usuario) {
-        return new Conversa(IdGenerator.generateId(), conteudo, paciente, usuario);
+        return new Conversa(conteudo, paciente, usuario);
     }
 
     @Override
