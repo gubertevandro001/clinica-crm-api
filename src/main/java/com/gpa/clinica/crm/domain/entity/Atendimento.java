@@ -58,19 +58,6 @@ public class Atendimento {
         calcularValor();
     }
 
-    public void adicionarProcedimento(ProcedimentoAtendimento procedimento) {
-        this.procedimentos.add(procedimento);
-        calcularValor();
-    }
-
-    public void removerProcedimento(String procedimentoId) {
-        this.procedimentos.removeIf(procedimento -> procedimento.getId().equals(procedimentoId));
-        if (this.procedimentos.isEmpty()) {
-            throw new DomainException("Lista de procedimentos não pode ser vazia!");
-        }
-        calcularValor();
-    }
-
     public void calcularValor() {
         this.valor = this.procedimentos.stream()
                 .map(ProcedimentoAtendimento::getValor)

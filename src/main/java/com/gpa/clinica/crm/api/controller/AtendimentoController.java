@@ -38,14 +38,4 @@ public class AtendimentoController implements AtendimentoControllerOpenAPI {
                 new PageableAtendimentoRequest(nome, dataInicio, dataFim, pagina, tamanho)
         ));
     }
-
-    @Override
-    public void adicionarProcedimento(String atendimentoId, String procedimentoId) {
-        atendimentoService.adicionarProcedimento(procedimentoId, atendimentoId);
-    }
-
-    @Override
-    public void removerProcedimento(String atendimentoId, String procedimentoId) {
-        atendimentoService.removerProcedimento(atendimentoId, procedimentoId);
-    }
 }

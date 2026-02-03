@@ -67,21 +67,6 @@ public class AtendimentoService {
         return atendimentoRepository.save(atendimento);
     }
 
-    public void adicionarProcedimento(String atendimentoId, String procedimentoId) {
-        Atendimento atendimento = buscarPorId(atendimentoId);
-        Procedimento procedimento = procedimentoService.buscarPorId(procedimentoId);
-        atendimento.adicionarProcedimento(ProcedimentoAtendimento.novoProcedimentoAtendimento(atendimento, procedimento));
-
-        atendimentoRepository.save(atendimento);
-    }
-
-    public void removerProcedimento(String atendimentoId, String procedimentoAtendimentoId) {
-        Atendimento atendimento = buscarPorId(atendimentoId);
-        atendimento.removerProcedimento(procedimentoAtendimentoId);
-
-        atendimentoRepository.save(atendimento);
-    }
-
     private List<ProcedimentoAtendimento> criarProcedimentos(Atendimento atendimento,
                                                              List<ProcedimentoIdRequest> procedimentos) {
         return procedimentos.stream().map(proc -> {

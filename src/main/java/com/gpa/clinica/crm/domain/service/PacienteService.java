@@ -35,7 +35,8 @@ public class PacienteService {
     }
 
     public Paciente buscarPorId(String pacienteId) {
-        return pacienteRepository.findById(pacienteId).orElseThrow(() -> new PacienteNaoEncontradoException(pacienteId));
+        return pacienteRepository.findById(pacienteId).orElseThrow(
+                () -> new PacienteNaoEncontradoException(pacienteId));
     }
 
     public Page<Paciente> buscarPorFiltro(PageableRequest request) {

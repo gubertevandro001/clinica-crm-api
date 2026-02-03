@@ -7,23 +7,27 @@ import com.gpa.clinica.crm.domain.valueobject.Role;
 import com.gpa.clinica.crm.infrastructure.auth.model.RegisterRequest;
 import com.gpa.clinica.crm.infrastructure.config.security.TokenService;
 import com.gpa.clinica.crm.infrastructure.config.security.TokenResponse;
-import lombok.RequiredArgsConstructor;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import java.util.UUID;
 
 @Service
-@RequiredArgsConstructor
 public class AuthService {
 
     private final AuthenticationManager authManager;
     private final UsuarioRepository usuarioRepository;
     private final TokenService tokenService;
     private final BCryptPasswordEncoder passwordEncoder;
+
+    public AuthService(AuthenticationManager authManager, UsuarioRepository usuarioRepository, TokenService tokenService, BCryptPasswordEncoder passwordEncoder) {
+        this.authManager = authManager;
+        this.usuarioRepository = usuarioRepository;
+        this.tokenService = tokenService;
+        this.passwordEncoder = passwordEncoder;
+    }
 
     public TokenResponse login(String login, String senha) {
         Authentication auth = authManager.authenticate(new UsernamePasswordAuthenticationToken(login, senha));
@@ -45,15 +49,14 @@ public class AuthService {
             throw new RuntimeException("Login já está em uso!");
         }
 
-        var usuario = Usuario.builder()
-                .id(IdGenerator.generateId())
-                .nome(registerRequest.nome())
-                .cpf(registerRequest.cpf())
-                .email(registerRequest.email())
-                .login(registerRequest.login())
-                .role(Role.ESTETICISTA)
-                .senha(passwordEncoder.encode(registerRequest.senha()))
-                .build();
+        var usuario = Usuario.novoUsuario(
+                registerRequest.nome(),
+                registerRequest.cpf(),
+                registerRequest.email(),
+                registerRequest.login(),
+                registerRequest.senha(),
+                Role.ESTETICISTA
+        );
 
         usuarioRepository.save(usuario);
     }

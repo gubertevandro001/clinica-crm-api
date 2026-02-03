@@ -1,14 +1,13 @@
 package com.gpa.clinica.crm.domain.entity;
 
+import com.gpa.clinica.crm.domain.util.IdGenerator;
 import com.gpa.clinica.crm.domain.valueobject.Role;
 import jakarta.persistence.*;
-import lombok.*;
 
 import java.util.Objects;
 
 @Entity
 @Table(name = "usuario")
-@Builder
 public class Usuario {
 
     @Id
@@ -38,15 +37,19 @@ public class Usuario {
 
     protected Usuario() {}
 
-    public Usuario(String id, String nome, String cpf, String email, String login, String senha, boolean ativo, Role role) {
-        this.id = id;
+    private Usuario(String nome, String cpf, String email, String login, String senha, Role role) {
+        this.id = IdGenerator.generateId();
         this.nome = nome;
         this.cpf = cpf;
         this.email = email;
         this.login = login;
         this.senha = senha;
-        this.ativo = ativo;
+        this.ativo = true;
         this.role = role;
+    }
+
+    public static Usuario novoUsuario(String nome, String cpf, String email, String login, String senha, Role role) {
+        return new Usuario(nome, cpf, email, login, senha, role);
     }
 
     public String getId() {

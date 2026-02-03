@@ -2,9 +2,7 @@ package com.gpa.clinica.crm.infrastructure.config.security;
 
 import com.auth0.jwt.JWT;
 import com.auth0.jwt.algorithms.Algorithm;
-import com.auth0.jwt.exceptions.JWTCreationException;
 import com.gpa.clinica.crm.infrastructure.auth.UsuarioAuth;
-import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -16,7 +14,6 @@ import java.time.ZoneId;
 import java.util.Date;
 
 @Service
-@RequiredArgsConstructor
 public class TokenService {
 
     @Value("${api.security.jwt.secret-key}")
@@ -26,6 +23,10 @@ public class TokenService {
     private String issuer;
 
     private final UserDetailsService userDetailsService;
+
+    public TokenService(UserDetailsService userDetailsService) {
+        this.userDetailsService = userDetailsService;
+    }
 
     public TokenResponse obterToken(UsuarioAuth usuario) {
         var dataExpiracaoToken = getExpirationDate();

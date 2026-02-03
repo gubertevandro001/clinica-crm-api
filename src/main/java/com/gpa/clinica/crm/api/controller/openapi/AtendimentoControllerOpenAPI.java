@@ -48,22 +48,4 @@ public interface AtendimentoControllerOpenAPI {
                                                                    @RequestParam(required = false)
                                                                    @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
                                                                    LocalDate dataFim);
-
-    @PutMapping("/{atendimentoId}/procedimentos/{procedimentoId}")
-    @ResponseStatus(HttpStatus.NO_CONTENT)
-    @Operation(summary = "Adiciona um procedimento no atendimento existente")
-    @ApiResponse(responseCode = "204", description = "Procediemento adicionado ao atendimento!")
-    @ApiResponse(responseCode = "400", description = "Erro de validação")
-    @ApiResponse(responseCode = "500", description = "Erro interno do servidor")
-    public void adicionarProcedimento(@PathVariable("atendimentoId") String atendimentoId,
-                                      @PathVariable("procedimentoId") String procedimentoId);
-
-    @DeleteMapping("/{atendimentoId}/procedimentos/{procedimentoAtendimentoId}")
-    @ResponseStatus(HttpStatus.NO_CONTENT)
-    @Operation(summary = "Remove um procedimento do atendimento existente")
-    @ApiResponse(responseCode = "204", description = "Procediemento removido do atendimento!")
-    @ApiResponse(responseCode = "400", description = "Erro de validação")
-    @ApiResponse(responseCode = "500", description = "Erro interno do servidor")
-    public void removerProcedimento(@PathVariable("atendimentoId") String atendimentoId,
-                                    @PathVariable("procedimentoAtendimentoId") String procedimentoId);
 }
