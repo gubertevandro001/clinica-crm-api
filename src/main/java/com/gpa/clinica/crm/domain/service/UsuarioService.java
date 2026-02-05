@@ -1,7 +1,7 @@
 package com.gpa.clinica.crm.domain.service;
 
-import com.gpa.clinica.crm.domain.exception.UsuarioNaoEncontradoException;
 import com.gpa.clinica.crm.domain.entity.Usuario;
+import com.gpa.clinica.crm.domain.exception.UsuarioNaoEncontradoException;
 import com.gpa.clinica.crm.domain.repository.UsuarioRepository;
 import org.springframework.stereotype.Service;
 

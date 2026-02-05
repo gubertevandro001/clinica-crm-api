@@ -1,6 +1,5 @@
 package com.gpa.clinica.crm.domain.entity;
 
-import com.gpa.clinica.crm.domain.exception.DomainException;
 import com.gpa.clinica.crm.domain.util.IdGenerator;
 import jakarta.persistence.*;
 

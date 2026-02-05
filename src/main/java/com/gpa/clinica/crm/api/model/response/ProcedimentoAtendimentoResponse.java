@@ -1,6 +1,5 @@
 package com.gpa.clinica.crm.api.model.response;
 
-import com.gpa.clinica.crm.domain.entity.Atendimento;
 import com.gpa.clinica.crm.domain.entity.ProcedimentoAtendimento;
 
 import java.math.BigDecimal;

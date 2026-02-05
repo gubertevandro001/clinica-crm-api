@@ -2,11 +2,10 @@ package com.gpa.clinica.crm.infrastructure.auth;
 
 import com.gpa.clinica.crm.domain.entity.Usuario;
 import com.gpa.clinica.crm.domain.repository.UsuarioRepository;
-import com.gpa.clinica.crm.domain.util.IdGenerator;
 import com.gpa.clinica.crm.domain.valueobject.Role;
 import com.gpa.clinica.crm.infrastructure.auth.model.RegisterRequest;
-import com.gpa.clinica.crm.infrastructure.config.security.TokenService;
 import com.gpa.clinica.crm.infrastructure.config.security.TokenResponse;
+import com.gpa.clinica.crm.infrastructure.config.security.TokenService;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;

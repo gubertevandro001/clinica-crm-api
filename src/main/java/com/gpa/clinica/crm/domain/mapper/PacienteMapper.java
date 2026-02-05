@@ -1,7 +1,8 @@
 package com.gpa.clinica.crm.domain.mapper;
 
 import com.gpa.clinica.crm.api.model.request.CadastrarPacienteRequest;
-import com.gpa.clinica.crm.domain.entity.*;
+import com.gpa.clinica.crm.domain.entity.Anamnese;
+import com.gpa.clinica.crm.domain.entity.Paciente;
 import com.gpa.clinica.crm.domain.valueobject.HabitosDiarios;
 import com.gpa.clinica.crm.domain.valueobject.HistoricoClinico;
 import com.gpa.clinica.crm.domain.valueobject.TratamentoEsteticoCirurgico;
